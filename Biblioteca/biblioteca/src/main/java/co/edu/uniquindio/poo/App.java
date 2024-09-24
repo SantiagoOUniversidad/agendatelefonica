@@ -73,6 +73,10 @@ public class App {
                     }else{
                         JOptionPane.showMessageDialog(null, biblioteca.buscarLibro(isbnBuscar), "Informacion", JOptionPane.INFORMATION_MESSAGE);
                     }
+
+                case "6":
+                    JOptionPane.showMessageDialog(null, "El salario total de los bibliotecarios es " + biblioteca.totalSalarios(), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                    
                 default:
                     break;
             }
