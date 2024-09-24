@@ -130,4 +130,14 @@ public class biblioteca {
         }
         return prestamoEncontrado;
     }
+
+    public float totalSalarios(){
+        float suma = 0;
+        for (int i = 0; i < listaBibliotecarios.size(); i++) {
+            bibliotecario infoSalario = listaBibliotecarios.get(i);
+            float sumaSalario = infoSalario.getSalario();
+            suma += sumaSalario;
+        }
+        return suma;
+    }
 }
