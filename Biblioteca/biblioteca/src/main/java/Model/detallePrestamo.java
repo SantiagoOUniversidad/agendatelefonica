@@ -10,7 +10,7 @@ public class detallePrestamo {
     public detallePrestamo(int cantidad, float subtotal, ArrayList <libro> listaDetallesLibros) {
         this.cantidad = cantidad;
         this.subtotal = subtotal;
-        this.listaDetallesLibros = listaDetallesLibros;
+        this.listaDetallesLibros = new ArrayList<>();
     }
 
     public int getCantidad() {

@@ -90,4 +90,44 @@ public class biblioteca {
         String mensaje = "Prestamo registrado exitosamente";
         return mensaje;
     }
+
+    public libro buscarLibro(String isbnIngresado){
+        libro libroEncontrado = null;
+        for (int i = 0; i < listaLibros.size(); i++) {
+            libro infoLibro = listaLibros.get(i);
+            if (infoLibro.getIsbn().equals(isbnIngresado)) {
+                libroEncontrado = infoLibro;
+                return libroEncontrado;
+            }
+        }
+        return libroEncontrado;
+    }
+
+    public String sobreescribirLibro(String codigo, String isbn, String autor, String titulo, String editorial, String fecha, int cantidad){
+        libro libroSobreescribir = buscarLibro(isbn);
+        String mensaje = "El libro no se ha encontrado";
+        if (libroSobreescribir != null) {
+            libroSobreescribir.setCodigo(codigo);
+            libroSobreescribir.setIsbn(isbn);
+            libroSobreescribir.setAutor(autor);
+            libroSobreescribir.setTitulo(titulo);
+            libroSobreescribir.setEditorial(editorial);
+            libroSobreescribir.setFecha(fecha);
+            libroSobreescribir.setUnidadesDisponibles(cantidad);
+            mensaje = "El libro se ha actualizado";
+        }
+        return mensaje;
+    }
+
+    public prestamo buscarPrestamo(String codigoIngresado){
+        prestamo prestamoEncontrado = null;
+        for (int i = 0; i < listaPrestamos.size(); i++) {
+            prestamo infoPrestamo = listaPrestamos.get(i);
+            if (infoPrestamo.getCodigo().equals(codigoIngresado)) {
+                prestamoEncontrado = infoPrestamo;
+                return prestamoEncontrado;
+            }
+        }
+        return prestamoEncontrado;
+    }
 }

@@ -15,11 +15,11 @@ public class App {
     public static void main(String[] args) {
         biblioteca biblioteca = new biblioteca(null, null, null, null, null, null);
         boolean flag = true;
-        while (flag = true) {
-             String accionElegida = JOptionPane.showInputDialog(null, "Que accion desea realizar? \n 0. Salir \n 1. Nuevo estudiante \n 2. Nuevo bibliotecario \n 3. Nuevo libro \n Profe, el programa no esta completo ya que hay funciones que no se realizar bien, espero poder aclarar mis dudas en clase y terminar el programa. Gracias", "Inicio", JOptionPane.QUESTION_MESSAGE);
+        while (flag == true) {
+            String accionElegida = JOptionPane.showInputDialog(null, "Que accion desea realizar? \n 0. Salir \n 1. Nuevo estudiante \n 2. Nuevo bibliotecario \n 3. Nuevo libro \n 4. Nuevo prestamo \n 5. Buscar libro\n Profe, el programa no esta completo ya que hay funciones que no se realizar bien, espero poder aclarar mis dudas en clase y terminar el programa. Gracias", "Inicio", JOptionPane.QUESTION_MESSAGE);
             switch (accionElegida) {
                 case "0":
-                    JOptionPane.showMessageDialog(null, "Finalizando programa.", "información", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Finalizando programa", "Información", JOptionPane.INFORMATION_MESSAGE);
                     flag = false;
                     break;
                 
@@ -60,12 +60,19 @@ public class App {
                     String fechaPrestamo = JOptionPane.showInputDialog(null, "Ingresa la fecha del inicio del prestamo", "Nuevo prestamo", JOptionPane.QUESTION_MESSAGE);
                     String fechaEntrega = JOptionPane.showInputDialog(null, "Ingresa la fecha de entrega del prestamo", "Nuevo prestamo", JOptionPane.QUESTION_MESSAGE);
                     String codigoPrestamo = JOptionPane.showInputDialog(null, "Ingresa el codigo del prestamo", "Nuevo prestamo", JOptionPane.QUESTION_MESSAGE);
-                    float total = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa la fecha del inicio del prestamo", "Nuevo prestamo", JOptionPane.QUESTION_MESSAGE));
+                    float total = Float.parseFloat(JOptionPane.showInputDialog(null, "Ingresa el total del prestamo", "Nuevo prestamo", JOptionPane.QUESTION_MESSAGE));
                     prestamo prestamo = new Model.prestamo(fechaPrestamo, fechaEntrega, codigoPrestamo, total, null);
                     JOptionPane.showMessageDialog(null, biblioteca.crearPrestamo(prestamo), "Informacion", JOptionPane.INFORMATION_MESSAGE);
                     System.out.println(biblioteca.listaPrestamos);
                     break;
 
+                case "5":
+                    String isbnBuscar = JOptionPane.showInputDialog(null, "Ingresa el isbn del libro", "Buscar libro", JOptionPane.QUESTION_MESSAGE);
+                    if (biblioteca.buscarLibro(isbnBuscar) == null) {
+                        JOptionPane.showMessageDialog(null, "El libro no existe", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(null, biblioteca.buscarLibro(isbnBuscar), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 default:
                     break;
             }

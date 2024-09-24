@@ -63,5 +63,12 @@ public class libro {
         this.unidadesDisponibles = unidadesDisponibles;
     }
 
+    @Override
+    public String toString() {
+        return "libro [codigo=" + codigo + ", isbn=" + isbn + ", autor=" + autor + ", titulo=" + titulo + ", editorial="
+                + editorial + ", fecha=" + fecha + ", unidadesDisponibles=" + unidadesDisponibles + "]";
+    }
+
+    
     
 }

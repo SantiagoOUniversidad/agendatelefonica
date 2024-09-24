@@ -15,7 +15,7 @@ public class bibliotecario {
         this.telefono = telefono;
         this.correo = correo;
         this.salario = salario;
-        this.listaPrestamoBibliotecarios = listaPrestamoBibliotecarios;
+        this.listaPrestamoBibliotecarios = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -56,6 +56,12 @@ public class bibliotecario {
     public void setListaPrestamoBibliotecarios(ArrayList<prestamo> listaPrestamoBibliotecarios) {
         this.listaPrestamoBibliotecarios = listaPrestamoBibliotecarios;
     }
-    
+
+    @Override
+    public String toString() {
+        return "bibliotecario [nombre=" + nombre + ", cedula=" + cedula + ", telefono=" + telefono + ", correo="
+                + correo + ", salario=" + salario + ", listaPrestamoBibliotecarios=" + listaPrestamoBibliotecarios
+                + "]";
+    }
     
 }

@@ -57,5 +57,9 @@ public class prestamo {
         this.listaDetallesPrestamos = listaDetallesPrestamos;
     }
 
-    
+    @Override
+    public String toString() {
+        return "prestamo [fechaPrestamo=" + fechaPrestamo + ", fechaEntrega=" + fechaEntrega + ", codigo=" + codigo
+                + ", total=" + total + ", listaDetallesPrestamos=" + listaDetallesPrestamos + "]";
+    }    
 }
