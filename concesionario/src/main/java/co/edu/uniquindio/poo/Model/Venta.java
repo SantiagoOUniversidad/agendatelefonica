@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class Venta {
     private Date fecha;
-    private Cliente cliente;
+    private Persona cliente;
     private Vehiculo vehiculo;
     
-    public Venta(Date fecha, Cliente cliente, Vehiculo vehiculo) {
+    public Venta(Date fecha, Persona cliente, Vehiculo vehiculo) {
         this.fecha = fecha;
         this.cliente = cliente;
         this.vehiculo = vehiculo;
@@ -21,7 +21,7 @@ public class Venta {
         this.fecha = fecha;
     }
 
-    public Cliente getCliente() {
+    public Persona getCliente() {
         return cliente;
     }
 

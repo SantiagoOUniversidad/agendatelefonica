@@ -1,25 +1,27 @@
 package co.edu.uniquindio.poo.Model;
 
+import java.util.Date;
+
 public class Compra {
-    private String fecha;
-    private Cliente cliente;
+    private Date fecha;
+    private Persona cliente;
     private Vehiculo vehiculo;
     
-    public Compra(String fecha, Cliente cliente, Vehiculo vehiculo) {
+    public Compra(Date fecha, Persona cliente, Vehiculo vehiculo) {
         this.fecha = fecha;
         this.cliente = cliente;
         this.vehiculo = vehiculo;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public Cliente getCliente() {
+    public Persona getCliente() {
         return cliente;
     }
 

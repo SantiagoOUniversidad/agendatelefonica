@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Alquiler {
     private Date fechaInicio;
-    private Date fechaFin;
-    private Cliente cliente;
+    private String fechaFin;
+    private Persona cliente;
     private Vehiculo vehiculo;
     
-    public Alquiler(Date fechaInicio, Date fechaFin, Cliente cliente, Vehiculo vehiculo) {
+    public Alquiler(Date fechaInicio, String fechaFin, Persona cliente, Vehiculo vehiculo) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.cliente = cliente;
@@ -23,15 +23,15 @@ public class Alquiler {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
 
-    public Cliente getCliente() {
+    public Persona getCliente() {
         return cliente;
     }
 
@@ -46,4 +46,14 @@ public class Alquiler {
     public void setVehiculo(Vehiculo vehiculo) {
         this.vehiculo = vehiculo;
     }
+
+    @Override
+    public String toString() {
+        return "Alquiler [fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", cliente=" + cliente
+                + ", vehiculo=" + vehiculo + "]";
+    }
+
+    
+
+    
 }

@@ -2,16 +2,23 @@ package co.edu.uniquindio.poo.Model;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Date;
 
 public class Concesionario {
     private String nombre;
     private Collection<Persona> listaPersonas = new LinkedList<>();
     private Collection<Vehiculo> listaVehiculos = new LinkedList<>();
+    private Collection<Alquiler> listaAlquileres = new LinkedList<>();
+    private Collection<Compra> listaCompras = new LinkedList<>();
+    private Collection<Venta> listaVentas = new LinkedList<>();
     
-    public Concesionario(String nombre, Collection<Persona> listaPersonas, Collection<Vehiculo> listaVehiculos) {
+    public Concesionario(String nombre, Collection<Persona> listaPersonas, Collection<Vehiculo> listaVehiculos, Collection<Alquiler> listaAlquileres, Collection<Compra> listaCompras, Collection<Venta> listaVentas) {
         this.nombre = nombre;
         this.listaPersonas = new LinkedList<>();
         this.listaVehiculos = new LinkedList<>();
+        this.listaAlquileres = new LinkedList<>();
+        this.listaCompras = new LinkedList<>();
+        this.listaVentas = new LinkedList<>();
     }
 
     public String getNombre() {
@@ -37,6 +44,32 @@ public class Concesionario {
     public void setListaVehiculos(Collection<Vehiculo> listaVehiculos) {
         this.listaVehiculos = listaVehiculos;
     }
+
+    public Collection<Alquiler> getListaAlquileres() {
+        return listaAlquileres;
+    }
+
+    public void setListaAlquileres(Collection<Alquiler> listaAlquileres) {
+        this.listaAlquileres = listaAlquileres;
+    }
+
+    public Collection<Compra> getListaCompras() {
+        return listaCompras;
+    }
+
+    public void setListaCompras(Collection<Compra> listaCompras) {
+        this.listaCompras = listaCompras;
+    }
+
+    public Collection<Venta> getListaVentas() {
+        return listaVentas;
+    }
+
+    public void setListaVentas(Collection<Venta> listaVentas) {
+        this.listaVentas = listaVentas;
+    }
+
+    
 
     //CRUD Vehiculo
 
@@ -81,7 +114,7 @@ public class Concesionario {
         return mensaje;
     }
 
-    //CRUD Cliente
+    //CRUD Persona
 
     public String crearPersona(Persona nuevaPersona){
         String mensaje = "";
@@ -124,7 +157,67 @@ public class Concesionario {
         return mensaje;
     }
 
+    //CRUD Alquiler
+
+    public String crearAlquiler(Date fechaInicio, String fechaFin, String cedula, String placa){
+        String mensaje = "";
+        if (fechaInicio != null & fechaFin != null & cedula != null & placa != null) {
+            Persona cliente = buscarPersona(cedula);
+            Vehiculo vehiculo = buscarVehiculo(placa);
+            Alquiler alquiler = new Alquiler(fechaInicio, fechaFin, cliente, vehiculo);
+            listaAlquileres.add(alquiler);
+            mensaje = "Alquiler creado";
+        } else {
+            mensaje = "Debe llenar todos los campos";
+        }
+        return mensaje;
+    }
+
+    public Alquiler buscarAlquiler(String cedula){
+        if (cedula != null) {
+            for (Alquiler alquiler : listaAlquileres) {
+                Persona cliente = alquiler.getCliente();
+                String buscarCliente = cliente.getCedula();
+                if (buscarCliente.equals(cedula)) {
+                    return alquiler;
+                }
+            }
+        }
+        return null;
+    }
+
+    //CRUD Venta
+
+    public String crearVenta(Date fecha, String cedula, String placa){
+        String mensaje = "";
+        if (fecha != null && cedula != null && placa != null) {
+            Persona cliente = buscarPersona(cedula);
+            Vehiculo vehiculo = buscarVehiculo(placa);
+            Venta venta = new Venta(fecha, cliente, vehiculo);
+            listaVentas.add(venta);
+            listaVehiculos.remove(vehiculo);
+            mensaje = "Venta creada";
+        } else {
+            mensaje = "Debe llenar todos los campos";
+        }
+        return mensaje;
+    }
+
+    public Venta buscarVenta(String cedula){
+        if (cedula != null) {
+            for (Venta venta : listaVentas) {
+                Persona cliente = venta.getCliente();
+                String buscarCliente = cliente.getCedula();
+                if (buscarCliente.equals(cedula)) {
+                    return venta;
+                }
+            }
+        }
+        return null;
+    }
+
     //Claves de administrador
+
     public Boolean verificarClave(String cedula){
         Persona administrador = buscarPersona(cedula);
         if (administrador.getCedula().equals(cedula) && administrador != null) {
@@ -132,6 +225,24 @@ public class Concesionario {
         } else {
             return false;
         }
+    }
+    
+
+    //Gestionar compra
+
+    public String crearCompra(Date fecha, String cedula, String placa){
+        String mensaje = "";
+        if (fecha != null && cedula != null && placa != null) {
+            Persona cliente = buscarPersona(cedula);
+            Vehiculo vehiculo = buscarVehiculo(placa);
+            Compra compra = new Compra(fecha, cliente, vehiculo);
+            listaCompras.add(compra);
+            listaVehiculos.remove(vehiculo);
+            mensaje = "Compra creada";
+        } else {
+            mensaje = "Debe llenar todos los campos";
+        }
+        return mensaje;
     }
 
 }

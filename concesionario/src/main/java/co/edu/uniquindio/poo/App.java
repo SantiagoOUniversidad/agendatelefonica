@@ -1,8 +1,11 @@
 package co.edu.uniquindio.poo;
 
+import java.util.Date;
+
 import javax.swing.JOptionPane;
 
 import co.edu.uniquindio.poo.Model.Administrador;
+import co.edu.uniquindio.poo.Model.Cliente;
 import co.edu.uniquindio.poo.Model.Concesionario;
 import co.edu.uniquindio.poo.Model.Empleado;
 import co.edu.uniquindio.poo.Model.Estado;
@@ -17,7 +20,10 @@ import co.edu.uniquindio.poo.Model.TipoCombustible;
  */
 public class App {
     public static void main(String[] args) {
-        Concesionario concesionario = new Concesionario("Mi Carro UQ", null, null);
+        Concesionario concesionario = new Concesionario("Mi carro UQ", null, null, null, null, null);
+        Administrador administradorPrincipal = new Administrador("Santiago", "Olarte", "1013109944", "123456");
+        concesionario.crearPersona(administradorPrincipal);
+        Date fechaActual = new Date(); // Obtiene la fecha actual
         boolean flag = true;
         while (flag == true){
             String accionElegida = JOptionPane.showInputDialog(null, "Que accion desea realizar \n 0. Salir \n 1. Gestionar vehiculos \n 2. Gestionar empleados \n 3. Gestionar clientes \n 4. Gestionar transacciones");
@@ -226,8 +232,6 @@ public class App {
                     }
                 case "2":
                     Boolean flagEmpleados = true;
-                    Administrador administradorPrincipal = new Administrador("Santiago", "Olarte", "1013109944", "123456");
-                    concesionario.crearPersona(administradorPrincipal);
                     while (flagEmpleados == true) {
                         String accionEmpleados = JOptionPane.showInputDialog(null, "Que accion desea realizar \n 0. Volver \n 1. Gestionar empleados");
                         switch (accionEmpleados) {
@@ -284,7 +288,87 @@ public class App {
                                 }
                         }
                     }
+                case "3":
+                    Boolean flagClientes = true;
+                    while (flagClientes == true) {
+                        String accionClientes = JOptionPane.showInputDialog(null, "Que accion desea realizar \n 0. Volver \n 1. Crear cliente \n 2. Buscar cliente \n 3. Eliminar cliente");
+                        switch (accionClientes) {
+                            case "0":
+                                JOptionPane.showMessageDialog(null, "Volviendo al menu anterior", "Información", JOptionPane.INFORMATION_MESSAGE);
+                                flagClientes = false;
+                                break;
+                            case "1":
+                                String nombreCliente = JOptionPane.showInputDialog(null, "Ingrese el nombre del empleado:");
+                                String apellidoCliente = JOptionPane.showInputDialog(null, "Ingrese el apellido del empleado:");
+                                String cedulaCliente = JOptionPane.showInputDialog(null, "Ingrese la cedula del empleado:");
+                                Cliente cliente = new Cliente(nombreCliente, apellidoCliente, cedulaCliente, null);
+                                JOptionPane.showMessageDialog(null, concesionario.crearPersona(cliente), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                break;
+                            case "2":
+                                String cedulaClienteBuscar = JOptionPane.showInputDialog(null, "Ingrese la cedula del cliente:");
+                                JOptionPane.showMessageDialog(null, concesionario.buscarPersona(cedulaClienteBuscar), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                break;
+                            case "3":
+                                String cedulaClienteEliminar = JOptionPane.showInputDialog(null, "Ingrese la cedula del cliente a eliminar:");
+                                JOptionPane.showMessageDialog(null, concesionario.eliminarPersona(cedulaClienteEliminar), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                break;
+                        }
+                    }
+                case "4":
+                    Boolean flagTransacciones = true;
+                    while (flagTransacciones == true) {
+                        String accionTransacciones = JOptionPane.showInputDialog(null, "Que accion desea realizar \n 0. Volver \n 1. Alquilar vehiculo \n 2. Vender vehiculo \n 3. Comprar vehiculo \n 4. Informacion de transacciones");
+                        switch (accionTransacciones){
+                            case "0":
+                                JOptionPane.showMessageDialog(null, "Volviendo al menu anterior", "Información", JOptionPane.INFORMATION_MESSAGE);
+                                flagTransacciones = false;
+                                break;
+                            case "1":
+                                String finAlquiler = JOptionPane.showInputDialog(null, "Ingrese la fecha de fin:");
+                                String cedulaClienteAlquiler = JOptionPane.showInputDialog(null, "Ingrese la cedula del cliente:");
+                                String placaVehiculoAlquiler = JOptionPane.showInputDialog(null, "Ingrese la placa del vehiculo:");
+                                JOptionPane.showMessageDialog(null, concesionario.crearAlquiler(fechaActual, finAlquiler, cedulaClienteAlquiler, placaVehiculoAlquiler), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                break;
+                            case "2":
+                                String cedulaClienteVenta = JOptionPane.showInputDialog(null, "Ingrese la cedula del cliente:");
+                                String placaVehiculoVenta = JOptionPane.showInputDialog(null, "Ingrese la placa del vehiculo:");
+                                JOptionPane.showMessageDialog(null, concesionario.crearVenta(fechaActual, cedulaClienteVenta, placaVehiculoVenta), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                break;
+                            case "3":
+                                String cedulaClienteCompra = JOptionPane.showInputDialog(null, "Ingrese la cedula del cliente:");
+                                String placaVehiculoCompra = JOptionPane.showInputDialog(null, "Ingrese la placa del vehiculo:");
+                                JOptionPane.showMessageDialog(null, concesionario.crearVenta(fechaActual, cedulaClienteCompra, placaVehiculoCompra), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                break;
+
+                            case "4":
+                                String cedulaAdministrador = JOptionPane.showInputDialog(null, "Ingrese la cedula de administrador:");
+                                String claveAdministrador = JOptionPane.showInputDialog(null, "Ingrese la clave de administrador:");
+                                if (claveAdministrador != null && cedulaAdministrador != null) {
+                                    Boolean acceso = concesionario.verificarClave(cedulaAdministrador);
+                                    if (acceso == true) {
+                                        Boolean flagInfoTransacciones = true;
+                                        while (flagInfoTransacciones == true) {
+                                            String accionInfoTransacciones = JOptionPane.showInputDialog(null, "Que accion desea realizar \n 0. Volver \n 1. Informacion alquileres \n 2. Informacion ventas \n 3. Informacion compras");
+                                            switch (accionInfoTransacciones){
+                                                case "0":
+                                                    JOptionPane.showMessageDialog(null, "Volviendo al menu anterior", "Información", JOptionPane.INFORMATION_MESSAGE);
+                                                    flagInfoTransacciones = false;
+                                                    break;
+                                                case "1":
+                                                    String cedulaClienteInfoAlquiler = JOptionPane.showInputDialog(null, "Ingrese la cedula del cliente:");
+                                                    JOptionPane.showMessageDialog(null, concesionario.buscarAlquiler(cedulaClienteInfoAlquiler), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                                    break;
+                                                case "2":
+                                                    String cedulaClienteInfoVentas = JOptionPane.showInputDialog(null, "Ingrese la cedula del cliente:");
+                                                    JOptionPane.showMessageDialog(null, concesionario.buscarAlquiler(cedulaClienteInfoVentas), "Informacion", JOptionPane.INFORMATION_MESSAGE);
+                                                    break;
+                                            }
+                                        }
+                                    }
+                        }
                 }
         }
     }
+}
+}
 }
